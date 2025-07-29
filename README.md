@@ -1,110 +1,147 @@
 
-# 🪣 Host a Static Website on Amazon S3
+# 🪣 Hosting a Static Website on Amazon S3
 
-This project demonstrates how to host a static website using **Amazon S3**. I set up a bucket, uploaded website files, and configured public access to make the site available on the internet.
+This project walks through the process of deploying a **static website** using [Amazon S3](https://aws.amazon.com/s3/), a widely-used object storage service on AWS. The goal is to gain practical experience with cloud hosting, S3 bucket configurations, permission settings, and public access management.
 
 ---
 
-## 📌 Project Goals
+## 📌 Project Overview
 
-In this project, I will demonstrate how to host a static website on Amazon S3 by setting up a bucket, uploading files, and enabling public access.
+**Objective:**  
+Host a static website using Amazon S3 by configuring a storage bucket, uploading files, setting public access policies, and enabling static website hosting.
 
-I did this project to:
-- Learn AWS basics
-- Understand cloud storage and permissions
-- Get hands-on experience with static site deployment
+**Why this project?**  
+I completed this project to:
+- Deepen my understanding of AWS services, particularly S3
+- Learn how to configure permissions and policies for secure cloud deployments
+- Build hands-on confidence with static website hosting in a real-world cloud environment
 
 ---
 
 ## 🛠️ Tools & Concepts
 
-- **Services used:** Amazon S3, AWS Management Console  
-- **Key concepts:**  
+- **AWS Services Used:**  
+  - Amazon S3  
+  - AWS Management Console
+
+- **Key Concepts Explored:**  
   - Static website hosting  
-  - S3 bucket permissions  
+  - S3 buckets and object storage  
   - Access Control Lists (ACLs)  
-  - Public object access  
+  - Public access policies and security best practices  
+  - Bucket endpoints and web accessibility  
 
 ---
 
-## ⏱️ Project Reflection
+## ⏱️ Time & Reflection
 
-- **Duration:** ~30 minutes  
-- **Most challenging part:** Fixing the 403 Forbidden error due to incorrect public permissions  
-- **Most rewarding part:** Seeing the website live and accessible via a public URL
+- **Time to complete:** ~30 minutes  
+- **Biggest challenge:** Resolving the 403 Forbidden error due to misconfigured public permissions  
+- **Most rewarding moment:** Seeing the site go live at the public S3 bucket URL
 
 ---
 
-## 🪣 Step 1: Create an S3 Bucket
+## 🪣 Step 1: Creating the S3 Bucket
 
-Creating the bucket took under 5 minutes. I selected:
-- **Region:** US East (Ohio) – `us-east-2`  
-  - Chosen for proximity to the target audience and lower latency  
-- **Bucket name:** Must be globally unique
+Creating a bucket in S3 is the first step to hosting a static site. Each bucket name must be **globally unique**, so I chose a custom name.
+
+- **Region selected:** `us-east-2` (Ohio) — chosen for its proximity to target users and optimal latency.
+- **Permissions setup:** ACLs were **enabled** to experiment with fine-grained access control.
 
 ![S3 Bucket Creation](./screenshot-1.png)
 
 ---
 
-## 📂 Step 2: Upload Website Files
+## 📁 Step 2: Uploading Website Files
 
-Files uploaded:
-- `index.html` — the main webpage
-- `NextWork - Everyone...love_files.zip` — images and assets
+I uploaded two critical components:
+- `index.html` — the core HTML file for the site
+- `NextWork - Everyone...love_files.zip` — includes image assets and other static files
 
-These files are required to render the full site properly.
+Both files are required for proper rendering of the site.
 
 ![Files Uploaded](./screenshot-2.png)
 
 ---
 
-## 🌐 Step 3: Enable Static Website Hosting
+## 🌍 Step 3: Enabling Static Website Hosting
 
-Website hosting means making your site publicly available online.
+S3 allows buckets to act as static web servers when enabled.
 
-Actions taken:
-- Enabled **Static website hosting** in S3 bucket settings
-- Set `index.html` as the default homepage
+- I turned on **Static Website Hosting** in the bucket settings
+- I specified `index.html` as the default root document
+- This generated a **public endpoint URL** for accessing the site
 
-I enabled **ACLs** for more granular control over object-level access.
+Additionally:
+- I chose to **enable ACLs** for object-level access control, despite AWS recommending bucket policies instead
 
 ![Enable Hosting](./screenshot-3.png)
 
 ---
 
-## 🔗 Step 4: Access via Bucket Endpoint
+## 🚫 Step 4: 403 Forbidden Error
 
-Once hosting was enabled, AWS provided a **bucket endpoint URL** for public access.
+After visiting the bucket endpoint, I initially encountered a `403 Forbidden` error.
 
-### ❗ Initial Error
-I encountered a `403 Forbidden` error.  
-**Cause:** Files were not yet publicly accessible.
+### ✅ Root Cause:
+The files were not publicly accessible. Public permissions were either missing or misconfigured.
 
 ![403 Error](./screenshot-4.png)
 
-### ✅ Fix
-I updated:
-- Object permissions to allow public access
-- Bucket policy to allow public reads
+---
 
-After this, the website loaded successfully!
+## 🔐 Step 5: Fixing Permissions
+
+To resolve the error:
+- I made all uploaded files public using **object-level permissions**
+- I also updated the **bucket policy** to allow anonymous users to `GET` objects
+
+Here’s a sample policy used:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadForStaticWebsite",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
+}
+```
+
+Once applied, the site became publicly accessible.
 
 ---
 
-## ❤️ Final Thoughts
+## ✅ Final Result
 
-I chose to do this project today to get practical cloud experience.  
-Something that would make learning with NextWork even better is more tips for common errors and optional challenges to deepen learning.
-
----
-
-
----
-
-## 🎉 Website Live!
-
-After resolving the permission issues, my website became publicly accessible at the S3 bucket URL.
+After fixing the public access configuration, I was able to view the live website at the S3 endpoint URL.
 
 ![Website Success](./screenshot-5.png)
+
+---
+
+## 💡 Lessons Learned
+
+- Always verify object and bucket permissions after enabling static hosting
+- Enabling ACLs can give you more control, but AWS prefers policy-based access management
+- S3 is a powerful tool for simple, cost-effective static website deployments
+
+---
+
 ## 🙌 Thanks to NextWork
-Thanks to [nextwork.org](https://nextwork.org) for making this project and learning opportunity possible!
+
+Special thanks to [nextwork.org](https://nextwork.org) for the guided learning experience and project inspiration. Their platform makes it easy to apply cloud concepts in real scenarios.
+
+---
+
+## 📎 Additional Resources
+
+- [Amazon S3 Documentation](https://docs.aws.amazon.com/s3/index.html)
+- [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html)
+- [AWS Free Tier](https://aws.amazon.com/free/)
+
