@@ -48,7 +48,11 @@ Creating a bucket in S3 is the first step to hosting a static site. Each bucket 
 - **Region selected:** `us-east-2` (Ohio) — chosen for its proximity to target users and optimal latency.
 - **Permissions setup:** ACLs were **enabled** to experiment with fine-grained access control.
 
-![S3 Bucket Creation](./screenshot-1.png)
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+  <img src="./screenshot-1.png" alt="S3 Bucket Created" style="max-width: 100%; border-radius: 4px;" />
+</div>
+
 
 ---
 
@@ -60,7 +64,11 @@ I uploaded two critical components:
 
 Both files are required for proper rendering of the site.
 
-![Files Uploaded](./screenshot-2.png)
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+  <img src="./screenshot-2.png" alt="Files Uploaded" style="max-width: 100%; border-radius: 4px;" />
+</div>
+
 
 ---
 
@@ -75,7 +83,11 @@ S3 allows buckets to act as static web servers when enabled.
 Additionally:
 - I chose to **enable ACLs** for object-level access control, despite AWS recommending bucket policies instead
 
-![Enable Hosting](./screenshot-3.png)
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+  <img src="./screenshot-3.png" alt="Enable Hosting" style="max-width: 100%; border-radius: 4px;" />
+</div>
+
 
 ---
 
@@ -86,7 +98,11 @@ After visiting the bucket endpoint, I initially encountered a `403 Forbidden` er
 ### ✅ Root Cause:
 The files were not publicly accessible. Public permissions were either missing or misconfigured.
 
-![403 Error](./screenshot-4.png)
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+  <img src="./screenshot-4.png" alt="403 Forbidden Error" style="max-width: 100%; border-radius: 4px;" />
+</div>
+
 
 ---
 
@@ -121,7 +137,11 @@ Once applied, the site became publicly accessible.
 
 After fixing the public access configuration, I was able to view the live website at the S3 endpoint URL.
 
-![Website Success](./screenshot-5.png)
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+  <img src="./screenshot-5.png" alt="Website Live" style="max-width: 100%; border-radius: 4px;" />
+</div>
+
 
 ---
 
