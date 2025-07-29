@@ -98,6 +98,13 @@ Something that would make learning with NextWork even better is more tips for co
 
 ---
 
-## 🔗 More Projects
-Explore more at: [nextwork.org](https://nextwork.org)  
-Questions? Ask in the community: [NextWork Questions Forum](https://community.nextwork.org/c/i-have-a-question?automatic_login=true)
+
+---
+
+## 🎉 Website Live!
+
+After resolving the permission issues, my website became publicly accessible at the S3 bucket URL.
+
+![Website Success](./screenshot-5.png)
+## 🙌 Thanks to NextWork
+Thanks to [nextwork.org](https://nextwork.org) for making this project and learning opportunity possible!
